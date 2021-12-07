@@ -1,20 +1,23 @@
-import { sequelize } from '../config/database.js';
+const sequelize = require('../config/database.js')
+const { DataTypes } = require('sequelize')
 
-export const url = sequelize.define('url', {
+const Url = sequelize.define('url', {
     userId: {
-        type: sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: true
     },
     shortenUrl: {
-        type: sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     numberOfVisits: {
-        type: sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     originalUrl: {
-        type: sequelize.STRING,
+        type: DataTypes.STRING,
         primaryKey: true
     }
 });
+
+module.exports = Url;
