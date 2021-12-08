@@ -1,16 +1,16 @@
 const shortUrl = require('node-url-shortener');
 
 const shortenUrl = (request, response) => {
-  const url = request.body;
-  console.log(request.body)
-  response.send(url)
-  // shortUrl.short(url, function(err, url){
-  //   const res = {
-  //     full: request.body,
-  //     short: url
-  //   }
-  //   response.send(res)
-  // });
+  shortUrl.short(request.body.url, function(err, url){
+    if (err) {
+      const res = { error: err}
+      return response.send(res)
+    }
+    const res = {
+      shortened: url
+    }
+    response.send(res)
+  });
 }
 
 module.exports = shortenUrl;

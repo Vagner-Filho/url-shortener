@@ -1,10 +1,13 @@
 const sequelize = require('./config/database.js')
-const User = require('./model/user.js')
+const bodyParser = require('body-parser')
 const urlRoutes = require('./routes/url.js')
+const userRoutes = require('./routes/user.js')
 const express = require('express')
 
 const app = express()
+app.use(bodyParser.json())
 app.use('/url', urlRoutes)
+app.use('/user', userRoutes)
 const PORT = 5000
 
 app.listen(PORT, async () => {
