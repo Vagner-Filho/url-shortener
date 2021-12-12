@@ -1,11 +1,9 @@
 const { v4: uuidv4 } = require('uuid');
-let users = [
-
-]
+const User = require('../model/User.js')
 let usersLoggedIn = [
 
 ]
-const createUser = (request, response) => {
+const createUser = async (request, response) => {
   const newUser = request.body;
 
   if (newUser.name.length < 3) {
@@ -15,12 +13,20 @@ const createUser = (request, response) => {
     return response.send('Password is missing')
   }
 
-  users.push({ ...newUser, id: uuidv4() });
+  const newId = uuidv4()
 
-  response.send(`User ${newUser.name} added to the database!`);
+  try {
+    const user = await User.create({ userId:newId, ...newUser })
+    const res = {
+      message: `${user.name} cadastrado com sucesso!`
+    }
+    response.send(res)
+  } catch (error) {
+    response.send({ error })
+  }
 }
 
-const logUserIn = (request, response) => {
+const logUserIn = async (request, response) => {
   const user = request.body
 
   for (const existingUser of users) {
@@ -32,8 +38,9 @@ const logUserIn = (request, response) => {
   response.send('Nome ou senha não encontrados.')
 }
 
-const getUsers = (request, response) => {
-  response.send({users, usersLoggedIn})
+const getUsers = async (request, response) => {
+  const users = await User.findAll()
+  response.send(users)
 }
 
 module.exports = { createUser, logUserIn, getUsers }

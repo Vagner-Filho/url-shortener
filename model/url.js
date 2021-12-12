@@ -6,7 +6,7 @@ const Url = sequelize.define('url', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    shortenUrl: {
+    shorterUrl: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -18,6 +18,8 @@ const Url = sequelize.define('url', {
         type: DataTypes.STRING,
         primaryKey: true
     }
+}, {
+    tableName: 'Urls'
 });
 
 module.exports = Url;
