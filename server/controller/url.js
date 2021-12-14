@@ -14,32 +14,10 @@ const shortenUrl = async (request, response) => {
       }
       // Stores shortened url in res object
       const res = {
+        status: 200,
         shortened: url
       }
-  
-      // Inserts a new URL if it hasnt been inserted
-      // if (urls.find(url => url.originalUrl === longUrl) === undefined) {
-      //   urls.push({shorterUrl: res.shortened, originalUrl: longUrl, numberOfVisits: 0})
-      //   const url = await Url.create({ shorterUrl: res.shortened, originalUrl: longUrl, numberOfVisits: 0 })
-      // }
-      // try {
-      //   const storedUrl = await Url.findAll({
-      //     where: {
-      //       shorterUrl: res.shortened
-      //     }
-      //   })
-      //   console.log(storedUrl)
-      //   if (!storedUrl) {
-      //     try {        
-      //       await Url.create({ shorterUrl: res.shortened, originalUrl: longUrl, numberOfVisits: 0 })
-      //     } catch (error) {
-      //       response.send({ error })
-      //     }
-      //   }
-      // } catch (error) {
-      //   response.send({ error })
-      // }
-      try {        
+      try {
         await Url.create({ userId: null, shorterUrl: res.shortened, numberOfVisits: 0, originalUrl: longUrl })
       } catch (error) {
         response.send({ error })
