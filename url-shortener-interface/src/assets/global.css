@@ -1,0 +1,11 @@
+:root {
+  --gray-bg: #f0f1f6;
+  --main-aqua-blue: #2bd1d1;
+  --active-aqua-blue: #9be3e2;
+  --looks-black: #3a2f53;
+  --main-font-color: #33303c;
+} 
+
+html {
+  scroll-behavior: smooth;
+}
